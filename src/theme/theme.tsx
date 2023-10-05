@@ -7,4 +7,5 @@ export const colors = {
   lightBackground: '#F2F2F2',
 };
 
-export const logo = './assets/logo.png';
+export const loginImage = require('../assets/login.png');
+export const logo = require('../assets/logo.png');
