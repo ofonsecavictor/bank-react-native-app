@@ -11,6 +11,7 @@ export interface CommonProps {
   top: string;
   bottom: string;
   fontWeight: string;
+  disabled?: boolean;
 }
 
 export const Button = styled.TouchableOpacity`
@@ -31,6 +32,7 @@ export const Button = styled.TouchableOpacity`
   margin-top: ${(props: {top: CommonProps}) => (props.top ? props.top : '0px')};
   margin-bottom: ${(props: {bottom: CommonProps}) =>
     props.bottom ? props.bottom : '0px'};
+  opacity: ${(props: CommonProps) => (props.disabled ? 0.5 : 1)};
 `;
 
 export const Text = styled.Text`

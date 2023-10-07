@@ -7,6 +7,8 @@ export interface CommonProps {
   color: string;
   fontSize: number;
   fontWeight: string | number;
+  top: number;
+  bottom: number;
 }
 
 export const Text = styled.Text`
@@ -16,5 +18,9 @@ export const Text = styled.Text`
     props.fontSize ? props.fontSize : 16};
   font-weight: ${(props: {fontWeight: CommonProps}) =>
     props.fontWeight ? props.fontWeight : '500'};
+  margin-top: ${(props: {top: CommonProps}) => (props.top ? props.top : 0)};
+  margin-bottom: ${(props: {bottom: CommonProps}) =>
+    props.bottom ? props.bottom : 0};
+
   text-align: center;
 `;

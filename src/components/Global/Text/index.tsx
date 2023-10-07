@@ -6,10 +6,24 @@ interface TextProps {
   color: string;
   size: string | number;
   fontWeight?: string | number;
+  top?: number;
+  bottom?: number;
 }
-export function Text({content, color, size, fontWeight}: TextProps) {
+export function Text({
+  content,
+  color,
+  size,
+  fontWeight,
+  top,
+  bottom,
+}: TextProps) {
   return (
-    <S.Text color={color} fontSize={size} fontWeight={fontWeight}>
+    <S.Text
+      color={color}
+      fontSize={size}
+      fontWeight={fontWeight}
+      top={top}
+      bottom={bottom}>
       {content}
     </S.Text>
   );

@@ -8,10 +8,12 @@ interface ButtonProps {
   title: string | number;
   fontSize?: string | number;
   top?: string;
-  bottom?: string;
+  bottom?: number;
   fontWeight?: string;
   onPress?: any;
+  disabled: boolean;
 }
+
 export function Button({
   primary,
   width,
@@ -22,6 +24,7 @@ export function Button({
   bottom,
   fontWeight,
   onPress,
+  disabled,
 }: ButtonProps) {
   return (
     <S.Button
@@ -30,7 +33,8 @@ export function Button({
       height={height}
       top={top}
       bottom={bottom}
-      onPress={onPress}>
+      onPress={onPress}
+      disabled={disabled}>
       <S.Text primary={primary} fontSize={fontSize} fontWeight={fontWeight}>
         {title}
       </S.Text>
