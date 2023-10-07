@@ -37,6 +37,7 @@ export function LoginScreen() {
           <S.TextContainer>
             <TextInput
               placeholder="Digite seu CPF ou CNPJ"
+              keyboardType="number-pad"
               style={{
                 width: '80%',
                 marginTop: 10,
