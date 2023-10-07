@@ -1,52 +1,29 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Text, View, Image, TouchableOpacity} from 'react-native';
+import {Image} from 'react-native';
 import {colors, loginImage, logo} from '../../../theme/theme';
+import {Button, MainContainer, Text} from '../../../components';
+import * as S from './styled';
 
 export function LoginScreenComponent() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.primary,
-      }}>
+    <MainContainer primary>
       <Image source={logo} resizeMode="contain" />
-
       <Image source={loginImage} resizeMode="contain" style={{marginTop: 20}} />
-      <View style={{width: '60%', marginTop: 25}}>
+      <S.TextContainer>
         <Text
-          style={{
-            color: colors.lightBackground,
-            fontWeight: '700',
-            textAlign: 'center',
-            fontSize: 18,
-          }}>
-          Que bom te ver aqui! Vamos abrir a sua conta?
-        </Text>
-
+          content="Que bom te ver aqui! Vamos abrir a sua conta?"
+          size="22px"
+          fontWeight="700"
+          color={colors.lightBackground}
+        />
         <Text
-          style={{
-            color: colors.lightBackground,
-            textAlign: 'center',
-            fontSize: 16,
-            marginTop: 25,
-          }}>
-          Para iniciar, vamos precisar de alguns dados, ok?
-        </Text>
-      </View>
-      <TouchableOpacity
-        style={{
-          marginTop: 80,
-          height: 50,
-          width: '80%',
-          borderRadius: 30,
-          backgroundColor: colors.secondary,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Vamos Lá!</Text>
-      </TouchableOpacity>
-    </View>
+          content="Para iniciar, vamos precisar de alguns dados, ok?"
+          size="18px"
+          color={colors.lightBackground}
+        />
+      </S.TextContainer>
+      <Button primary title="Vamos lá!" top={'15px'} />
+    </MainContainer>
   );
 }
