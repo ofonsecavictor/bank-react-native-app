@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {Image, View} from 'react-native';
+import {Image, SafeAreaView} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import {logo2} from '../../../theme/theme';
 import {Button} from '../../../components';
@@ -59,11 +59,6 @@ export function InitSlider() {
     return (
       <S.SlideContainer>
         <S.Slide>
-          <Image
-            source={logo2}
-            resizeMode="contain"
-            style={{alignSelf: 'center'}}
-          />
           <S.SlideImage source={item.image} />
           <S.SlideText>{item.text}</S.SlideText>
         </S.Slide>
@@ -89,7 +84,17 @@ export function InitSlider() {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: 'white',
+        justifyContent: 'space-around',
+      }}>
+      <Image
+        source={logo2}
+        resizeMode="contain"
+        style={{alignSelf: 'center'}}
+      />
       <AppIntroSlider
         data={slides}
         showDoneButton={false}
@@ -106,6 +111,6 @@ export function InitSlider() {
       <S.SkipButton onPress={handleStartButtonPress}>
         <S.SkipText>Pular para o login ou abertura de conta</S.SkipText>
       </S.SkipButton>
-    </View>
+    </SafeAreaView>
   );
 }

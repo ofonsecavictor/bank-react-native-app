@@ -8,10 +8,10 @@ interface ButtonProps {
   title: string | number;
   fontSize?: string | number;
   top?: string;
-  bottom?: number;
+  bottom?: string;
   fontWeight?: string;
   onPress?: any;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export function Button({
