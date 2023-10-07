@@ -9,6 +9,8 @@ export interface CommonProps {
   color: string;
   fontSize: string | number;
   top: string;
+  bottom: string;
+  fontWeight: string;
 }
 
 export const Button = styled.TouchableOpacity`
@@ -27,6 +29,8 @@ export const Button = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   margin-top: ${(props: {top: CommonProps}) => (props.top ? props.top : '0px')};
+  margin-bottom: ${(props: {bottom: CommonProps}) =>
+    props.bottom ? props.bottom : '0px'};
 `;
 
 export const Text = styled.Text`
@@ -34,4 +38,6 @@ export const Text = styled.Text`
     primary ? colors.background : colors.lightBackground};
   font-size: ${(props: {fontSize: CommonProps}) =>
     props.fontSize ? props.fontSize : '16px'};
+  font-weight: ${(props: {fontWeight: CommonProps}) =>
+    props.fontWeight ? props.fontWeight : '400'};
 `;

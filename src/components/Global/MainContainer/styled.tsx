@@ -7,7 +7,7 @@ export interface CommonProps {
   align: string;
 }
 
-export const MainContainer = styled.TouchableOpacity`
+export const MainContainer = styled.SafeAreaView`
   background-color: ${({primary}: CommonProps) =>
     primary ? colors.primary : 'transparent'};
   flex: 1;

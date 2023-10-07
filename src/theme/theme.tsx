@@ -9,3 +9,5 @@ export const colors = {
 
 export const loginImage = require('../assets/login.png');
 export const logo = require('../assets/logo.png');
+export const logo2 = require('../assets/logo-2.png');
+export const login3 = require('../assets/login3.png');

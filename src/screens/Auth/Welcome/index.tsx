@@ -1,65 +1,90 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Image, View} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import {colors} from '../../../theme/theme';
+import {logo2} from '../../../theme/theme';
+import {Button} from '../../../components';
+import * as S from './styled';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useNavigation} from '@react-navigation/native';
+import {AuthStackProps} from '../../../routes/AuthStack';
+
+interface Slide {
+  key: string;
+  text: string;
+  image: number;
+}
+type NavigationParam = NativeStackNavigationProp<
+  AuthStackProps,
+  'AuthOrSignScreen'
+>;
 
 export function InitSlider() {
-  const slides = [
+  const navigation = useNavigation<NavigationParam>();
+  const slides: Slide[] = [
     {
       key: 'one',
-      title: 'Title 1',
-      text: 'Description.\nSay something cool',
+      text: 'Olá, se você está buscando alugar um imóvel e não tem fiador, conheça a nossa Carta Fiança Locatícia.',
       image: require('../../../assets/1.png'),
     },
     {
       key: 'two',
-      title: 'Title 2',
-      text: 'Other cool stuff',
-      image: require('../../../assets/1.png'),
+      text: 'O Mauá se responsabiliza pela fiança e caução do imóvel que você alugar, sem burocracias!',
+      image: require('../../../assets/2.png'),
     },
     {
       key: 'three',
-      title: 'Rocket guy',
-      text: "I'm already out of descriptions\n\nLorem ipsum bla bla bla",
-      image: require('../../../assets/1.png'),
+      text: 'E o melhor, até  70% mais barato que as outras ofertas do mercado!',
+      image: require('../../../assets/3.png'),
+    },
+    {
+      key: 'four',
+      text: 'Faça a cotação agora! É rápido, fácil e confira na hora quanto fica o valor para o seu imóvel!',
+      image: require('../../../assets/4.png'),
     },
   ];
-
+  const handleStartButtonPress = async () => {
+    try {
+      await AsyncStorage.setItem('hasSeenIntro', 'true');
+      navigation.navigate('AuthOrSignScreen');
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const [showStartButton, setShowStartButton] = useState(false);
 
-  const renderSlide = ({item, index}: any) => {
+  const renderSlide = ({item, index}: {item: Slide; index: number}) => {
     const isLastSlide = index === slides.length - 1;
-
     return (
-      <View style={[styles.slide, {backgroundColor: item.backgroundColor}]}>
-        <Image source={item.image} style={styles.image} />
-        <Text>{item.title}</Text>
-        <Text>{item.text}</Text>
-        <View style={styles.dotTextContainer}>
-          <View style={styles.dotIndicators}>
+      <S.SlideContainer>
+        <S.Slide>
+          <Image
+            source={logo2}
+            resizeMode="contain"
+            style={{alignSelf: 'center'}}
+          />
+          <S.SlideImage source={item.image} />
+          <S.SlideText>{item.text}</S.SlideText>
+        </S.Slide>
+        <S.DotTextContainer>
+          <S.DotIndicators>
             {slides.map((_, i) => (
-              <View
-                key={i}
-                style={[
-                  styles.dot,
-                  i === index
-                    ? {backgroundColor: colors.secondary}
-                    : {backgroundColor: colors.tertiary, opacity: 0.3},
-                ]}
-              />
+              <S.Dot key={i} active={i === index} />
             ))}
-          </View>
+          </S.DotIndicators>
           {isLastSlide && showStartButton && (
-            <TouchableOpacity style={styles.startButton} onPress={() => {}}>
-              <Text style={styles.startButtonText}>Começar</Text>
-            </TouchableOpacity>
+            <Button
+              primary
+              title="Cotar meu afiançamento"
+              width="90%"
+              fontWeight="600"
+              bottom="30px"
+              onPress={handleStartButtonPress}
+            />
           )}
-          <Text style={styles.skipText}>
-            Pular para o login ou abertura de conta
-          </Text>
-        </View>
-      </View>
+        </S.DotTextContainer>
+      </S.SlideContainer>
     );
   };
 
@@ -67,71 +92,20 @@ export function InitSlider() {
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <AppIntroSlider
         data={slides}
+        showDoneButton={false}
         renderItem={renderSlide}
+        showNextButton={false}
+        showSkipButton={false}
+        showPrevButton={false}
         onSlideChange={index => {
           setShowStartButton(index === slides.length - 1);
         }}
         dotStyle={{backgroundColor: 'transparent', opacity: 0.4}}
         activeDotStyle={{backgroundColor: 'transparent', opacity: 0.4}}
       />
+      <S.SkipButton onPress={handleStartButtonPress}>
+        <S.SkipText>Pular para o login ou abertura de conta</S.SkipText>
+      </S.SkipButton>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  slide: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  image: {
-    width: 200,
-    height: 200,
-    resizeMode: 'contain',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
-    marginTop: 20,
-  },
-  text: {
-    fontSize: 16,
-    color: 'white',
-    textAlign: 'center',
-    marginVertical: 10,
-  },
-  startButton: {
-    backgroundColor: colors.secondary,
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 20,
-  },
-  startButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
-    textAlign: 'center',
-  },
-  dotTextContainer: {
-    marginTop: 10,
-    alignItems: 'center',
-  },
-  dotIndicators: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  dot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: 'white',
-    margin: 5,
-  },
-  skipText: {
-    fontSize: 16,
-    color: colors.primary,
-    bottom: 0,
-  },
-});
