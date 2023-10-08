@@ -16,12 +16,24 @@ import {TextInput} from 'react-native-paper';
 import {Formik} from 'formik';
 import {loginValidationSchema} from '../../../utils/authValidation';
 import {formatCpfCnpj} from '../../../utils/functions';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {CommonStackProps} from '../../../routes/CommonStack';
+import {useAuth} from '../../../contexts/AuthContext';
+
+type NavigationParam = NativeStackNavigationProp<CommonStackProps, 'MainTab'>;
 
 export function LoginScreen() {
+  const {setIsLogged} = useAuth();
   const [maskedCpfCnpj, setMaskedCpfCnpj] = useState('');
+  const navigation = useNavigation<NavigationParam>();
 
   const handleLogin = (values: any) => {
-    console.log(values);
+    if (values) {
+      setIsLogged(true);
+      console.log(values);
+      navigation.navigate('MainTab');
+    }
   };
   return (
     <MainContainer primary>
@@ -133,7 +145,9 @@ export function LoginScreen() {
                     top={'15px'}
                     disabled={
                       !!formikProps.errors.cpfCnpj ||
-                      !!formikProps.errors.password
+                      !!formikProps.errors.password ||
+                      formikProps.values.cpfCnpj === '' ||
+                      formikProps.values.password === ''
                     }
                     onPress={formikProps.handleSubmit}
                   />

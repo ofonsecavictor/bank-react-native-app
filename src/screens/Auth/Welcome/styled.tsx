@@ -6,17 +6,17 @@ export interface CommonProps {
   color: string;
 }
 
-export const SlideContainer = styled.SafeAreaView`
+export const SlideContainer = styled.View`
   flex: 1;
   background-color: ${colors.text};
   align-items: center;
+  justify-content: center;
 `;
 
 export const Slide = styled.View`
   flex: 1;
-  align-items: center;
-  justify-content: space-evenly;
   padding: 20px;
+  width: 90%;
 `;
 
 export const SlideImage = styled.Image`

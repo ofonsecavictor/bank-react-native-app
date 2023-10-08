@@ -25,9 +25,11 @@ export function Button({
   fontWeight,
   onPress,
   disabled,
+  ...rest
 }: ButtonProps) {
   return (
     <S.Button
+      {...rest}
       primary={primary}
       width={width}
       height={height}

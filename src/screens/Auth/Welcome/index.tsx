@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {Image, SafeAreaView} from 'react-native';
+import {Image, SafeAreaView, Text, View} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import {logo2} from '../../../theme/theme';
 import {Button} from '../../../components';
@@ -12,8 +12,12 @@ import {AuthStackProps} from '../../../routes/AuthStack';
 
 interface Slide {
   key: string;
-  text: string;
+  mainText: string;
   image: number;
+  highlightedText?: string;
+  additionalText?: string;
+  emphasizedText?: string;
+  extraText?: string;
 }
 type NavigationParam = NativeStackNavigationProp<
   AuthStackProps,
@@ -25,22 +29,34 @@ export function InitSlider() {
   const slides: Slide[] = [
     {
       key: 'one',
-      text: 'Olá, se você está buscando alugar um imóvel e não tem fiador, conheça a nossa Carta Fiança Locatícia.',
+      mainText:
+        'Olá, se você está buscando alugar um imóvel e não tem fiador, conheça a nossa ',
+      highlightedText: 'Carta Fiança Locatícia',
+      additionalText: '.',
       image: require('../../../assets/1.png'),
     },
     {
       key: 'two',
-      text: 'O Mauá se responsabiliza pela fiança e caução do imóvel que você alugar, sem burocracias!',
+      mainText: 'O Mauá se responsabiliza pela ',
+      highlightedText: 'fiança e caução',
+      additionalText: ' do imóvel que você alugar, ',
+      emphasizedText: 'sem burocracias',
+      extraText: '!',
       image: require('../../../assets/2.png'),
     },
     {
       key: 'three',
-      text: 'E o melhor, até  70% mais barato que as outras ofertas do mercado!',
+      mainText: 'E o melhor, até ',
+      highlightedText: '70% mais barato ',
+      additionalText: 'que as outras ofertas do mercado!',
       image: require('../../../assets/3.png'),
     },
     {
       key: 'four',
-      text: 'Faça a cotação agora! É rápido, fácil e confira na hora quanto fica o valor para o seu imóvel!',
+      mainText: '',
+      emphasizedText: 'Faça a cotação agora! ',
+      extraText:
+        'É rápido, fácil e confira na hora quanto fica o valor para o seu imóvel!',
       image: require('../../../assets/4.png'),
     },
   ];
@@ -60,7 +76,19 @@ export function InitSlider() {
       <S.SlideContainer>
         <S.Slide>
           <S.SlideImage source={item.image} />
-          <S.SlideText>{item.text}</S.SlideText>
+          <View>
+            <Text style={{textAlign: 'center', fontSize: 25}}>
+              {item.mainText}
+              <Text style={{fontWeight: 'bold', fontSize: 25}}>
+                {item.highlightedText}
+              </Text>
+              {item.additionalText}
+              <Text style={{fontWeight: 'bold', fontSize: 25}}>
+                {item.emphasizedText}
+              </Text>
+              {item.extraText}
+            </Text>
+          </View>
         </S.Slide>
         <S.DotTextContainer>
           <S.DotIndicators>
@@ -75,6 +103,7 @@ export function InitSlider() {
               width="90%"
               fontWeight="600"
               bottom="30px"
+              top="-30px"
               onPress={handleStartButtonPress}
             />
           )}
@@ -88,12 +117,11 @@ export function InitSlider() {
       style={{
         flex: 1,
         backgroundColor: 'white',
-        justifyContent: 'space-around',
       }}>
       <Image
         source={logo2}
         resizeMode="contain"
-        style={{alignSelf: 'center'}}
+        style={{alignSelf: 'center', paddingTop: 150}}
       />
       <AppIntroSlider
         data={slides}
