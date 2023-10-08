@@ -73,5 +73,7 @@
   <string>Zocial.ttf</string>
   <string>Fontisto.ttf</string>
 </array>
+<key>NSFaceIDUsageDescription</key>
+<string>Sua mensagem de uso da Face ID</string>
 </dict>
 </plist>

@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   Keyboard,
@@ -20,6 +21,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {CommonStackProps} from '../../../routes/CommonStack';
 import {useAuth} from '../../../contexts/AuthContext';
+import TouchID from 'react-native-touch-id';
 
 type NavigationParam = NativeStackNavigationProp<CommonStackProps, 'MainTab'>;
 
@@ -27,7 +29,6 @@ export function LoginScreen() {
   const {setIsLogged} = useAuth();
   const [maskedCpfCnpj, setMaskedCpfCnpj] = useState('');
   const navigation = useNavigation<NavigationParam>();
-
   const handleLogin = (values: any) => {
     if (values) {
       setIsLogged(true);
@@ -35,6 +36,29 @@ export function LoginScreen() {
       navigation.navigate('MainTab');
     }
   };
+  const handleTouchIDAuthentication = async () => {
+    try {
+      const biometryType = await TouchID.isSupported();
+      if (biometryType === 'FaceID' || biometryType === 'TouchID') {
+        const success = await TouchID.authenticate();
+        if (success) {
+          setIsLogged(true);
+          console.log('SUCESSO');
+          navigation.navigate('MainTab');
+        } else {
+          console.log('FALHOU');
+        }
+      } else {
+        console.log('NAO SUPORTADO');
+      }
+    } catch (error) {
+      console.log('ERROR:', error);
+    }
+  };
+  useEffect(() => {
+    handleTouchIDAuthentication();
+  }, []);
+
   return (
     <MainContainer primary>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -155,6 +179,14 @@ export function LoginScreen() {
               )}
             </Formik>
           </S.TextContainer>
+          <TouchableOpacity
+            style={{
+              alignSelf: 'center',
+              marginTop: 20,
+            }}
+            onPress={handleTouchIDAuthentication}>
+            <Text size={'16px'} color="white" content="Entrar com biometria" />
+          </TouchableOpacity>
           <View style={{flex: 1}} />
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
