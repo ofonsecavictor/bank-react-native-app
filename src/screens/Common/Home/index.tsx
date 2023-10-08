@@ -4,34 +4,43 @@ import {HomeHeader} from '../../../components/Home/Header';
 import {CardNoticeComponent} from '../../../components/Home/Card';
 import {ActionsButtons} from '../../../components/Home/ActionsButtons';
 import {colors} from '../../../theme/theme';
+import {useNavigation} from '@react-navigation/native';
+
+type RouteKeys = 'Pix' | 'Boletos';
 
 export function HomeScreen() {
+  const navigation = useNavigation<any>();
+
   const Actions = [
     {
       id: 1,
       name: 'Transferir',
       icon: 'send',
-      screen: 'Pix',
+      screen: 'Transferencia',
     },
     {
       id: 2,
       name: 'Boletos',
       icon: 'ticket',
-      screen: 'Pix',
+      screen: 'Boletos',
     },
     {
       id: 3,
       name: 'Pagamentos',
       icon: 'barcode',
-      screen: 'Pix',
+      screen: 'Pagamento',
     },
     {
       id: 4,
       name: 'Recarregar',
       icon: 'cellphone',
-      screen: 'Pix',
+      screen: 'Recarga',
     },
   ];
+
+  const handleNavigation = (screenName: string) => {
+    navigation.navigate(screenName);
+  };
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.text}}>
@@ -49,7 +58,14 @@ export function HomeScreen() {
             justifyContent: 'space-around',
           }}>
           {Actions.map(item => {
-            return <ActionsButtons text={item.name} iconName={item.icon} />;
+            return (
+              <ActionsButtons
+                key={item.id}
+                text={item.name}
+                iconName={item.icon}
+                onPress={() => handleNavigation(item.screen as RouteKeys)}
+              />
+            );
           })}
         </View>
         <View style={{height: 20}} />

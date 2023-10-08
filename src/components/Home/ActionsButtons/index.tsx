@@ -6,11 +6,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 interface ActionsButtonsProps {
   text: string;
   iconName: string;
+  onPress: () => void;
 }
 
-export function ActionsButtons({text, iconName}: ActionsButtonsProps) {
+export function ActionsButtons({text, iconName, onPress}: ActionsButtonsProps) {
   return (
     <TouchableOpacity
+      onPress={onPress}
       style={[
         {
           borderWidth: 1,

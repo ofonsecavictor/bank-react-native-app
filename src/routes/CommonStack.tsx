@@ -1,52 +1,98 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {HomeScreen} from '../screens/Common/Home';
-import {colors} from '../theme/theme';
-import {Image, TouchableOpacity} from 'react-native';
 import {MainTab} from './MainTab';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import {BoletoScreen} from '../screens/Common/Boletos';
+import {colors} from '../theme/theme';
+import {
+  renderBoletoRightHeaderComponent,
+  renderExtractBoletoHeaderComponent,
+} from '../components/Global/Headers/homeHeader';
+import {useNavigation} from '@react-navigation/native';
+import {TransferScreen} from '../screens/Common/Tranferencia';
+import {PaymentScreen} from '../screens/Common/Pagamento';
+import {RecargaScreen} from '../screens/Common/Recarregar';
 export type CommonStackProps = {
   MainTab: undefined;
-  HomeScreen: undefined;
+  Boletos: undefined;
+  Transferencia: undefined;
+  Pagamento: undefined;
+  Recarga: undefined;
 };
 
 const Stack = createStackNavigator<CommonStackProps>();
 
-const renderLeftHeaderComponent = () => (
-  <Image
-    source={require('../assets/logo.png')}
-    style={{height: 40, width: 60, marginLeft: 20}}
-  />
-);
-
-const renderRightHeaderComponent = () => (
-  <TouchableOpacity>
-    <MaterialCommunityIcons
-      name="logout"
-      size={30}
-      color={colors.secondary}
-      style={{marginRight: 20}}
-    />
-  </TouchableOpacity>
-);
-
 export function CommonStack() {
+  const navigation = useNavigation();
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: true,
-        headerStyle: {
-          backgroundColor: colors.primary,
-          height: 120,
-        },
-        headerTitle: () => null,
-        headerLeft: renderLeftHeaderComponent,
-        headerRight: renderRightHeaderComponent,
+        headerShown: false,
       }}>
       <Stack.Screen name="MainTab" component={MainTab} />
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen
+        name="Boletos"
+        component={BoletoScreen}
+        options={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: colors.primary,
+            height: 120,
+          },
+          headerTitle: () => null,
+          headerLeft: () => renderExtractBoletoHeaderComponent(navigation),
+          headerRight: renderBoletoRightHeaderComponent,
+        }}
+      />
+      <Stack.Screen
+        name="Transferencia"
+        component={TransferScreen}
+        options={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: colors.primary,
+            height: 120,
+            borderBottomLeftRadius: 20,
+            borderBottomRightRadius: 20,
+          },
+          headerTintColor: colors.text,
+          headerBackTitle: 'Transferência',
+          headerTitle: () => null,
+        }}
+      />
+      <Stack.Screen
+        name="Pagamento"
+        component={PaymentScreen}
+        options={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: colors.primary,
+            height: 120,
+            borderBottomLeftRadius: 20,
+            borderBottomRightRadius: 20,
+          },
+          headerTintColor: colors.text,
+          headerBackTitle: 'Pagamento',
+          headerTitle: () => null,
+        }}
+      />
+
+      <Stack.Screen
+        name="Recarga"
+        component={RecargaScreen}
+        options={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: colors.primary,
+            height: 120,
+            borderBottomLeftRadius: 20,
+            borderBottomRightRadius: 20,
+          },
+          headerTintColor: colors.text,
+          headerBackTitle: 'Recarga',
+          headerTitle: () => null,
+        }}
+      />
     </Stack.Navigator>
   );
 }
