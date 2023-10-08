@@ -39,7 +39,7 @@ export function HomeHeader() {
               fontWeight: 'bold',
               marginTop: 5,
             }}>
-            R$ 1.2344.535,00
+            R$ 0,00
           </Text>
         </View>
         <View>
