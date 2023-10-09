@@ -19,7 +19,7 @@ export function ActionsButtons({text, iconName, onPress}: ActionsButtonsProps) {
           borderColor: colors.secondary,
           backgroundColor: colors.text,
           width: '45%',
-          height: 90,
+          height: '40%',
           borderRadius: 10,
           justifyContent: 'center',
           alignItems: 'center',

@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   Keyboard,
@@ -15,20 +14,11 @@ import {TextInput} from 'react-native-paper';
 import {Formik} from 'formik';
 import {loginValidationSchema} from '../../../utils/authValidation';
 import {formatCpfCnpj} from '../../../utils/functions';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {CommonStackProps} from '../../../routes/CommonStack';
-import {useAuth} from '../../../contexts/authContext';
-import TouchID from 'react-native-touch-id';
 import {AuthModal} from '../../../components/Auth/Modal';
 import {useModal} from '../../../contexts/modalContext';
 
-type NavigationParam = NativeStackNavigationProp<CommonStackProps, 'MainTab'>;
-
 export function LoginScreen() {
-  const {setIsLogged} = useAuth();
   const [maskedCpfCnpj, setMaskedCpfCnpj] = useState('');
-  const navigation = useNavigation<NavigationParam>();
   const {modal, toggleModal} = useModal();
 
   const handleOpenModal = (key: string) => {
@@ -41,34 +31,10 @@ export function LoginScreen() {
 
   const handleLogin = (values: any) => {
     if (values) {
-      // setIsLogged(true);
       handleOpenModal('Auth');
       console.log(values);
-      // navigation.navigate('MainTab');
     }
   };
-  const handleTouchIDAuthentication = async () => {
-    try {
-      const biometryType = await TouchID.isSupported();
-      if (biometryType === 'FaceID' || biometryType === 'TouchID') {
-        const success = await TouchID.authenticate();
-        if (success) {
-          setIsLogged(true);
-          console.log('SUCESSO');
-          navigation.navigate('MainTab');
-        } else {
-          console.log('FALHOU');
-        }
-      } else {
-        console.log('NAO SUPORTADO');
-      }
-    } catch (error) {
-      console.log('ERROR:', error);
-    }
-  };
-  useEffect(() => {
-    handleTouchIDAuthentication();
-  }, []);
 
   return (
     <MainContainer primary>
