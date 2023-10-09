@@ -42,14 +42,20 @@ export function HomeScreen() {
     navigation.navigate(screenName);
   };
 
+  const showCards = false;
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.text}}>
       <HomeHeader />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{flexGrow: 1, alignItems: 'center'}}>
-        <CardNoticeComponent />
-        <CardNoticeComponent />
+        {showCards && (
+          <>
+            <CardNoticeComponent />
+            <CardNoticeComponent />
+          </>
+        )}
         <View
           style={{
             width: '100%',

@@ -1,5 +1,8 @@
 import React from 'react';
 import * as S from './styled';
+import {View} from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {colors} from '../../../theme/theme';
 
 interface ButtonProps {
   primary: boolean;
@@ -12,6 +15,9 @@ interface ButtonProps {
   fontWeight?: string;
   onPress?: any;
   disabled?: boolean;
+  align?: string;
+  isAccAuth?: boolean;
+  document?: string;
 }
 
 export function Button({
@@ -25,6 +31,9 @@ export function Button({
   fontWeight,
   onPress,
   disabled,
+  align,
+  isAccAuth,
+  document,
   ...rest
 }: ButtonProps) {
   return (
@@ -36,10 +45,41 @@ export function Button({
       top={top}
       bottom={bottom}
       onPress={onPress}
-      disabled={disabled}>
-      <S.Text primary={primary} fontSize={fontSize} fontWeight={fontWeight}>
-        {title}
-      </S.Text>
+      disabled={disabled}
+      align={align}>
+      {!isAccAuth && (
+        <S.Text primary={primary} fontSize={fontSize} fontWeight={fontWeight}>
+          {title}
+        </S.Text>
+      )}
+
+      {isAccAuth && (
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            width: '100%',
+          }}>
+          <View>
+            <S.Text primary={primary} fontSize={fontSize} fontWeight={600}>
+              {title}
+            </S.Text>
+            <S.Text
+              primary={primary}
+              fontSize={fontSize}
+              fontWeight={fontWeight}>
+              {document}
+            </S.Text>
+          </View>
+          <MaterialCommunityIcons
+            name="arrow-right"
+            size={22}
+            color={colors.text}
+            style={{marginRight: 15}}
+          />
+        </View>
+      )}
     </S.Button>
   );
 }

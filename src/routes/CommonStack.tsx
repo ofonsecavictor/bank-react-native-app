@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {MainTab} from './MainTab';
@@ -12,6 +11,7 @@ import {useNavigation} from '@react-navigation/native';
 import {TransferScreen} from '../screens/Common/Tranferencia';
 import {PaymentScreen} from '../screens/Common/Pagamento';
 import {RecargaScreen} from '../screens/Common/Recarregar';
+import {Platform} from 'react-native';
 export type CommonStackProps = {
   MainTab: undefined;
   Boletos: undefined;
@@ -57,7 +57,7 @@ export function CommonStack() {
           },
           headerTintColor: colors.text,
           headerBackTitle: 'Transferência',
-          headerTitle: () => null,
+          headerTitle: Platform.OS === 'android' ? 'Transferência' : '',
         }}
       />
       <Stack.Screen
@@ -73,7 +73,7 @@ export function CommonStack() {
           },
           headerTintColor: colors.text,
           headerBackTitle: 'Pagamento',
-          headerTitle: () => null,
+          headerTitle: Platform.OS === 'android' ? 'Pagamento' : '',
         }}
       />
 
@@ -90,7 +90,7 @@ export function CommonStack() {
           },
           headerTintColor: colors.text,
           headerBackTitle: 'Recarga',
-          headerTitle: () => null,
+          headerTitle: Platform.OS === 'android' ? 'Recarga' : '',
         }}
       />
     </Stack.Navigator>

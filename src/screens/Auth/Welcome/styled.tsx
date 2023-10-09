@@ -14,14 +14,13 @@ export const SlideContainer = styled.View`
 `;
 
 export const Slide = styled.View`
-  flex: 1;
-  padding: 20px;
   width: 90%;
 `;
 
 export const SlideImage = styled.Image`
-  width: 300px;
-  height: 300px;
+  min-width: 150px;
+  min-height: 150px;
+  max-height: 250px;
   resize-mode: contain;
   align-self: center;
 `;

@@ -3,13 +3,13 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {colors} from '../../../theme/theme';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import {RFValue} from 'react-native-responsive-fontsize';
 export function HomeHeader() {
   return (
     <View
       style={{
         backgroundColor: colors.primary,
-        height: 150,
+        height: '30%',
         padding: 20,
         justifyContent: 'space-between',
         borderBottomLeftRadius: 20,
@@ -21,7 +21,9 @@ export function HomeHeader() {
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-        <Text style={{fontSize: 22, color: 'white'}}>Olá, Victor!</Text>
+        <Text style={{fontSize: RFValue(22), color: 'white'}}>
+          Olá, Victor!
+        </Text>
         <TouchableOpacity>
           <Icon name="visibility" size={30} color={colors.secondary} />
         </TouchableOpacity>
@@ -29,12 +31,13 @@ export function HomeHeader() {
 
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View>
-          <Text style={{fontSize: 16, color: 'white', fontWeight: 'bold'}}>
+          <Text
+            style={{fontSize: RFValue(22), color: 'white', fontWeight: 'bold'}}>
             Saldo da conta hoje
           </Text>
           <Text
             style={{
-              fontSize: 22,
+              fontSize: RFValue(22),
               color: colors.secondary,
               fontWeight: 'bold',
               marginTop: 5,
@@ -43,7 +46,7 @@ export function HomeHeader() {
           </Text>
         </View>
         <View>
-          <TouchableOpacity>
+          <TouchableOpacity style={{marginRight: 5}}>
             <MaterialCommunityIcons
               name="reload"
               size={20}

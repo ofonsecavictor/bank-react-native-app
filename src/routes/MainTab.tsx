@@ -14,7 +14,7 @@ import {
   renderPerfilLeftHeaderComponent,
 } from '../components/Global/Headers/homeHeader';
 import {AccountScreen} from '../screens/Common/AccountScreen';
-import {useAuth} from '../contexts/AuthContext';
+import {useAuth} from '../contexts/authContext';
 
 const Tab = createBottomTabNavigator();
 
@@ -40,7 +40,8 @@ export function MainTab() {
           backgroundColor: colors.secondary,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
-          height: 100,
+          height: '10%',
+          padding: 5,
         },
         tabBarLabelStyle: {
           fontSize: 16,

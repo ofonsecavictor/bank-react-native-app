@@ -4,11 +4,13 @@ import {AuthOrSignScreen} from '../screens/Auth/AuthOrSignScreen';
 import {InitSlider} from '../screens/Auth/Welcome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {LoginScreen} from '../screens/Auth/LoginScreen';
+import {MainRegisterScreen} from '../screens/Auth/RegisterFlow';
 
 export type AuthStackProps = {
   Slider: undefined;
   AuthOrSignScreen: undefined;
   LoginScreen: undefined;
+  Register: undefined;
 };
 
 const Auth = createStackNavigator<AuthStackProps>();
@@ -29,6 +31,7 @@ export function AuthStack() {
       {!hasSeenIntro && <Auth.Screen name="Slider" component={InitSlider} />}
       <Auth.Screen name="AuthOrSignScreen" component={AuthOrSignScreen} />
       <Auth.Screen name="LoginScreen" component={LoginScreen} />
+      <Auth.Screen name="Register" component={MainRegisterScreen} />
     </Auth.Navigator>
   );
 }

@@ -4,7 +4,7 @@ import * as S from './styled';
 interface TextProps {
   content: string | number;
   color: string;
-  size: string | number;
+  size?: string | number;
   fontWeight?: string | number;
   top?: number;
   bottom?: number;

@@ -8,9 +8,9 @@ export interface CommonProps {
 }
 
 export const MainContainer = styled.SafeAreaView`
+  flex: 1;
   background-color: ${({primary}: CommonProps) =>
     primary ? colors.primary : 'transparent'};
-  flex: 1;
   justify-content: ${(props: {justify: CommonProps}) =>
     props.justify ? props.justify : 'center'};
   align-items: ${(props: {align: CommonProps}) =>

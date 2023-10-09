@@ -5,10 +5,8 @@ import {
   Image,
   Keyboard,
   KeyboardAvoidingView,
-  Platform,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
 } from 'react-native';
 import {colors, login3, logo} from '../../../theme/theme';
 import {Button, MainContainer, Text} from '../../../components';
@@ -20,8 +18,10 @@ import {formatCpfCnpj} from '../../../utils/functions';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {CommonStackProps} from '../../../routes/CommonStack';
-import {useAuth} from '../../../contexts/AuthContext';
+import {useAuth} from '../../../contexts/authContext';
 import TouchID from 'react-native-touch-id';
+import {AuthModal} from '../../../components/Auth/Modal';
+import {useModal} from '../../../contexts/modalContext';
 
 type NavigationParam = NativeStackNavigationProp<CommonStackProps, 'MainTab'>;
 
@@ -29,11 +29,22 @@ export function LoginScreen() {
   const {setIsLogged} = useAuth();
   const [maskedCpfCnpj, setMaskedCpfCnpj] = useState('');
   const navigation = useNavigation<NavigationParam>();
+  const {modal, toggleModal} = useModal();
+
+  const handleOpenModal = (key: string) => {
+    toggleModal({
+      [key]: {
+        isOpen: true,
+      },
+    });
+  };
+
   const handleLogin = (values: any) => {
     if (values) {
-      setIsLogged(true);
+      // setIsLogged(true);
+      handleOpenModal('Auth');
       console.log(values);
-      navigation.navigate('MainTab');
+      // navigation.navigate('MainTab');
     }
   };
   const handleTouchIDAuthentication = async () => {
@@ -64,10 +75,11 @@ export function LoginScreen() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
           style={{
+            marginTop: '15%',
             width: '100%',
             alignItems: 'center',
           }}
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          behavior={'padding'}>
           <Image
             source={logo}
             resizeMode="contain"
@@ -76,7 +88,13 @@ export function LoginScreen() {
           <Image
             source={login3}
             resizeMode="contain"
-            style={{borderRadius: 10, height: 250}}
+            style={{
+              borderRadius: 10,
+              minWidth: 150,
+              minHeight: 150,
+              maxHeight: 250,
+              maxWidth: 250,
+            }}
           />
           <S.TextContainer>
             <Formik
@@ -179,17 +197,9 @@ export function LoginScreen() {
               )}
             </Formik>
           </S.TextContainer>
-          <TouchableOpacity
-            style={{
-              alignSelf: 'center',
-              marginTop: 20,
-            }}
-            onPress={handleTouchIDAuthentication}>
-            <Text size={'16px'} color="white" content="Entrar com biometria" />
-          </TouchableOpacity>
-          <View style={{flex: 1}} />
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
+      <AuthModal isVisible={modal?.Auth?.isOpen} dataResponse={true} />
     </MainContainer>
   );
 }

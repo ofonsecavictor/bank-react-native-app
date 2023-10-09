@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
 import {AuthStackProps} from '../../../routes/AuthStack';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 interface Slide {
   key: string;
@@ -69,21 +70,20 @@ export function InitSlider() {
     }
   };
   const [showStartButton, setShowStartButton] = useState(false);
-
+  const isLastSlide = showStartButton && slides.length > 0;
   const renderSlide = ({item, index}: {item: Slide; index: number}) => {
-    const isLastSlide = index === slides.length - 1;
     return (
       <S.SlideContainer>
         <S.Slide>
           <S.SlideImage source={item.image} />
           <View>
-            <Text style={{textAlign: 'center', fontSize: 25}}>
+            <Text style={{textAlign: 'center', fontSize: RFValue(25)}}>
               {item.mainText}
-              <Text style={{fontWeight: 'bold', fontSize: 25}}>
+              <Text style={{fontWeight: 'bold', fontSize: RFValue(25)}}>
                 {item.highlightedText}
               </Text>
               {item.additionalText}
-              <Text style={{fontWeight: 'bold', fontSize: 25}}>
+              <Text style={{fontWeight: 'bold', fontSize: RFValue(25)}}>
                 {item.emphasizedText}
               </Text>
               {item.extraText}
@@ -96,17 +96,6 @@ export function InitSlider() {
               <S.Dot key={i} active={i === index} />
             ))}
           </S.DotIndicators>
-          {isLastSlide && showStartButton && (
-            <Button
-              primary
-              title="Cotar meu afiançamento"
-              width="90%"
-              fontWeight="600"
-              bottom="30px"
-              top="-30px"
-              onPress={handleStartButtonPress}
-            />
-          )}
         </S.DotTextContainer>
       </S.SlideContainer>
     );
@@ -136,6 +125,17 @@ export function InitSlider() {
         dotStyle={{backgroundColor: 'transparent', opacity: 0.4}}
         activeDotStyle={{backgroundColor: 'transparent', opacity: 0.4}}
       />
+      <View style={{alignItems: 'center', width: '100%', bottom: '10%'}}>
+        {isLastSlide && showStartButton && (
+          <Button
+            primary
+            title="Cotar meu afiançamento"
+            width="90%"
+            fontWeight="600"
+            onPress={handleStartButtonPress}
+          />
+        )}
+      </View>
       <S.SkipButton onPress={handleStartButtonPress}>
         <S.SkipText>Pular para o login ou abertura de conta</S.SkipText>
       </S.SkipButton>

@@ -12,6 +12,7 @@ export interface CommonProps {
   bottom: string;
   fontWeight: string;
   disabled?: boolean;
+  align: string;
 }
 
 export const Button = styled.TouchableOpacity`
@@ -28,10 +29,12 @@ export const Button = styled.TouchableOpacity`
   justify-content: center;
   border-width: ${({primary}: CommonProps) => (primary ? '0px' : '1px')};
   justify-content: center;
-  align-items: center;
+  align-items: ${(props: {align: CommonProps}) =>
+    props.align ? props.align : 'center'};
   margin-top: ${(props: {top: CommonProps}) => (props.top ? props.top : '0px')};
   margin-bottom: ${(props: {bottom: CommonProps}) =>
     props.bottom ? props.bottom : '0px'};
+  padding-left: ${({align}: CommonProps) => (align ? '25px' : '0px')};
   opacity: ${(props: CommonProps) => (props.disabled ? 0.5 : 1)};
 `;
 
