@@ -5,6 +5,7 @@ import {BlurView} from '@react-native-community/blur';
 import {useModal} from '../../../contexts/modalContext';
 import {DoestHaveAccMessage} from './components/doestHaveAcc';
 import {HaveAccountMessage} from './components/haveAccount';
+import {useAuth} from '../../../contexts/authContext';
 
 interface AuthModalProps {
   isVisible: boolean;
@@ -13,6 +14,7 @@ interface AuthModalProps {
 
 export function AuthModal({isVisible, dataResponse}: AuthModalProps) {
   const {toggleModal} = useModal();
+  const {setIsLogged} = useAuth();
 
   const handleCloseModal = () => {
     toggleModal({
@@ -20,6 +22,11 @@ export function AuthModal({isVisible, dataResponse}: AuthModalProps) {
         isOpen: false,
       },
     });
+  };
+
+  const handleAcc = () => {
+    setIsLogged(true);
+    handleCloseModal();
   };
 
   return (
@@ -44,7 +51,7 @@ export function AuthModal({isVisible, dataResponse}: AuthModalProps) {
               <DoestHaveAccMessage onPress={handleCloseModal} />
             )}
             {dataResponse === true && (
-              <HaveAccountMessage onPress={handleCloseModal} />
+              <HaveAccountMessage onPress={handleAcc} />
             )}
           </View>
         </BlurView>
