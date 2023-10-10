@@ -36,6 +36,7 @@ export function CommonStack() {
         options={{
           headerShown: true,
           headerStyle: {
+            shadowColor: 'transparent',
             backgroundColor: colors.primary,
             height: 120,
           },
@@ -51,6 +52,7 @@ export function CommonStack() {
           headerShown: true,
           headerStyle: {
             backgroundColor: colors.primary,
+            shadowColor: 'transparent',
             height: 120,
             borderBottomLeftRadius: 20,
             borderBottomRightRadius: 20,
@@ -68,8 +70,7 @@ export function CommonStack() {
           headerStyle: {
             backgroundColor: colors.primary,
             height: 90,
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
+            shadowColor: 'transparent',
           },
           headerTintColor: colors.text,
           headerBackTitle: 'Pagamento',
@@ -83,6 +84,7 @@ export function CommonStack() {
         options={{
           headerShown: true,
           headerStyle: {
+            shadowColor: 'transparent',
             backgroundColor: colors.primary,
             height: 120,
             borderBottomLeftRadius: 20,

@@ -38,6 +38,7 @@ export function MainTab() {
         tabBarActiveTintColor: colors.primary,
         tabBarStyle: {
           backgroundColor: colors.secondary,
+          shadowColor: 'transparent',
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           height: '10%',
@@ -61,6 +62,7 @@ export function MainTab() {
         options={{
           headerShown: true,
           headerStyle: {
+            shadowColor: 'transparent',
             backgroundColor: colors.primary,
             height: 120,
           },
@@ -75,6 +77,7 @@ export function MainTab() {
         options={{
           headerShown: true,
           headerStyle: {
+            shadowColor: 'transparent',
             backgroundColor: colors.primary,
             height: 120,
           },
@@ -117,6 +120,7 @@ export function MainTab() {
         options={{
           headerShown: true,
           headerStyle: {
+            shadowColor: 'transparent',
             backgroundColor: colors.primary,
             height: 120,
           },
