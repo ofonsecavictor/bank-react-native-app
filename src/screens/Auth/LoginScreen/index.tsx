@@ -115,13 +115,18 @@ export function LoginScreen() {
                     activeOutlineColor={colors.secondary}
                     underlineColorAndroid={colors.secondary}
                     mode="outlined"
+                    keyboardType="number-pad"
                     error={
                       !!formikProps.errors.password &&
                       formikProps.touched.password
                     }
                     placeholder="Digite sua senha"
                     secureTextEntry={true}
-                    onChangeText={formikProps.handleChange('password')}
+                    onChangeText={text => {
+                      if (text.length <= 8) {
+                        formikProps.handleChange('password')(text);
+                      }
+                    }}
                     onBlur={formikProps.handleBlur('password')}
                     value={formikProps.values.password}
                   />
