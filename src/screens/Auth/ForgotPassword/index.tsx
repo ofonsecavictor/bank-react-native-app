@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useRef} from 'react';
 import {TextInput, Keyboard} from 'react-native';
 import {MainContainer} from '../../../components';

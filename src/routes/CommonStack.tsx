@@ -10,7 +10,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {TransferScreen} from '../screens/Common/Tranferencia';
 import {PaymentScreen} from '../screens/Common/Pagamento';
-import {RecargaScreen} from '../screens/Common/Recarregar';
+import {RecargaScreen} from '../screens/Common/Recarga';
 import {Platform} from 'react-native';
 export type CommonStackProps = {
   MainTab: undefined;
