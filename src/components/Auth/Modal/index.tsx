@@ -11,13 +11,21 @@ import {Text} from '../../Global/Text';
 import {useAuth, useModal} from '../../../contexts';
 import useBiometricAuthentication from '../../../utils/handleTouchId';
 import {validationPasswordSchema} from '../../../utils';
+import {useNavigation} from '@react-navigation/native';
+import {AuthStackProps} from '../../../routes/AuthStack';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 interface AuthModalProps {
   isVisible: boolean;
   dataResponse: any;
 }
+type NavigationParam = NativeStackNavigationProp<
+  AuthStackProps,
+  'ForgotPassword'
+>;
 
 export function AuthModal({isVisible, dataResponse}: AuthModalProps) {
+  const navigation = useNavigation<NavigationParam>();
   const [password, setPassword] = useState('');
   const {toggleModal} = useModal();
   const {setIsLogged} = useAuth();
@@ -25,7 +33,7 @@ export function AuthModal({isVisible, dataResponse}: AuthModalProps) {
     useBiometricAuthentication();
 
   useEffect(() => {
-    if (password.length === 8) {
+    if (password.length === 6) {
       handleLogin();
     }
   }, [password]);
@@ -42,6 +50,11 @@ export function AuthModal({isVisible, dataResponse}: AuthModalProps) {
     setIsLogged(true);
     console.log('Login realizado com sucesso');
     handleCloseModal();
+  };
+
+  const handleForgot = () => {
+    setBiometricFailed(false);
+    navigation.navigate('ForgotPassword');
   };
 
   return (
@@ -93,8 +106,10 @@ export function AuthModal({isVisible, dataResponse}: AuthModalProps) {
                       placeholder="Digite sua senha"
                       secureTextEntry={true}
                       onChangeText={(text: string) => {
-                        handleChange('password')(text);
-                        setPassword(text);
+                        if (text.length <= 6) {
+                          handleChange('password')(text);
+                          setPassword(text);
+                        }
                       }}
                       error={!!errors.password && touched.password}
                       onBlur={handleBlur('password')}
@@ -103,7 +118,7 @@ export function AuthModal({isVisible, dataResponse}: AuthModalProps) {
                     {touched.password && errors.password && (
                       <S.ErrorText>{errors.password}</S.ErrorText>
                     )}
-                    <S.ForgotPasswordText>
+                    <S.ForgotPasswordText onPress={handleForgot}>
                       <Text
                         content="Esqueci a minha senha"
                         color={colors.secondary}

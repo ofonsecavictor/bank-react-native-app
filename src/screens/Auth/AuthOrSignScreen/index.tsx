@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {Image} from 'react-native';
 import {loginImage, logo} from '../../../theme/theme';
@@ -23,17 +22,7 @@ export function AuthOrSignScreen() {
   return (
     <MainContainer primary>
       <Image source={logo} resizeMode="contain" />
-      <Image
-        source={loginImage}
-        resizeMode="contain"
-        style={{
-          marginTop: 20,
-          minWidth: 150,
-          minHeight: 150,
-          maxHeight: 250,
-          maxWidth: 250,
-        }}
-      />
+      <S.Image source={loginImage} resizeMode="contain" />
       <S.TextContainer>
         <Button
           primary

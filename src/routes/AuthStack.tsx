@@ -5,12 +5,16 @@ import {InitSlider} from '../screens/Auth/Welcome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {LoginScreen} from '../screens/Auth/LoginScreen';
 import {MainRegisterScreen} from '../screens/Auth/RegisterFlow';
+import {ForgotPasswordScreen} from '../screens/Auth/ForgotPassword';
+import {colors} from '../theme/theme';
+import {Platform} from 'react-native';
 
 export type AuthStackProps = {
   Slider: undefined;
   AuthOrSignScreen: undefined;
   LoginScreen: undefined;
   Register: undefined;
+  ForgotPassword: undefined;
 };
 
 const Auth = createStackNavigator<AuthStackProps>();
@@ -32,6 +36,18 @@ export function AuthStack() {
       <Auth.Screen name="AuthOrSignScreen" component={AuthOrSignScreen} />
       <Auth.Screen name="LoginScreen" component={LoginScreen} />
       <Auth.Screen name="Register" component={MainRegisterScreen} />
+      <Auth.Screen
+        name="ForgotPassword"
+        component={ForgotPasswordScreen}
+        options={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: colors.text,
+          headerTitle: Platform.OS === 'android' ? 'Recuperação de senha' : '',
+        }}
+      />
     </Auth.Navigator>
   );
 }

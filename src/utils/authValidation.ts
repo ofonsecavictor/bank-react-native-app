@@ -12,9 +12,9 @@ export const loginValidationSchema = yup.object().shape({
     .required('Campo obrigatório')
     .test(
       'valid-password',
-      'A senha deve conter exatamente 8 números',
+      'A senha deve conter exatamente 6 números',
       value => {
-        return /^\d{8}$/.test(value);
+        return /^\d{6}$/.test(value);
       },
     ),
 });
@@ -23,5 +23,5 @@ export const validationPasswordSchema = yup.object().shape({
   password: yup
     .string()
     .required('Senha é obrigatória')
-    .min(8, 'Senha deve ter pelo menos 8 caracteres'),
+    .min(6, 'Senha deve ter pelo menos 8 caracteres'),
 });

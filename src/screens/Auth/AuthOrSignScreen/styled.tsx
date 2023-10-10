@@ -7,3 +7,11 @@ export const TextContainer = styled.View`
   justify-content: space-around;
   align-items: center;
 `;
+
+export const Image = styled.Image`
+  margin-top: 20px;
+  min-width: 150px;
+  min-height: 150px;
+  max-height: 250px;
+  max-width: 250px;
+`;

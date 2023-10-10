@@ -1,27 +1,6 @@
 import {TextInput} from 'react-native-paper';
 import styled from 'styled-components/native';
-import {colors} from '../../../theme/theme';
-
-export const TextContainer = styled.View`
-  width: 100%;
-  margin-top: 15px;
-  height: 40%;
-  justify-content: space-evenly;
-  align-items: center;
-`;
-
-export const KeyboardAvoidingView = styled.KeyboardAvoidingView`
-  margin-top: 15%;
-  width: 100%;
-  align-items: center;
-`;
-
-export const Image = styled.Image`
-  min-width: 150px;
-  min-height: 150px;
-  max-height: 250px;
-  max-width: 250px;
-`;
+import {colors} from '../../../../../theme/theme';
 
 export const CustomTextInput = styled(TextInput).attrs({
   theme: {
