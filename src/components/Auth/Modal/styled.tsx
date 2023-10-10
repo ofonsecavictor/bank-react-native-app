@@ -25,7 +25,7 @@ export const AuthText = styled.Text`
 `;
 
 export const AuthModal = styled(Modal)`
-  margin: 0;
+  margin: 0px;
 `;
 
 export const KeyboardAvoidingViewStyled = styled.KeyboardAvoidingView`
@@ -57,7 +57,7 @@ export const ForgotPasswordText = styled.TouchableOpacity`
 export const FailedContainer = styled.View`
   width: 100%;
   height: 50%;
-  bottom: 0;
+  bottom: 0px;
   position: absolute;
   align-items: center;
   justify-content: space-evenly;

@@ -53,8 +53,9 @@ export function AuthModal({isVisible, dataResponse}: AuthModalProps) {
   };
 
   const handleForgot = () => {
-    setBiometricFailed(false);
     navigation.navigate('ForgotPassword');
+    handleCloseModal();
+    setBiometricFailed(false);
   };
 
   return (

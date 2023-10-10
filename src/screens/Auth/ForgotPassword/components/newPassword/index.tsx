@@ -21,7 +21,7 @@ export function NewPasswordScreen() {
       <View style={{width: '80%'}}>
         <Text
           fontWeight={300}
-          size={22}
+          size={'22px'}
           content="Cadastre sua nova senha
           de acesso ao Mauá Bank."
           color={colors.text}

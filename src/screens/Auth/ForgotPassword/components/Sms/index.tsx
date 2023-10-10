@@ -23,7 +23,7 @@ export function ForgotPassSMS({
       <View style={{width: '80%'}}>
         <Text
           fontWeight={300}
-          size={22}
+          size={'22px'}
           content="Digite o código que enviamos por SMS no celular cadastrado."
           color={colors.text}
         />

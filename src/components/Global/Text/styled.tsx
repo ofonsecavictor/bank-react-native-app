@@ -5,7 +5,7 @@ export interface CommonProps {
   width: string | number;
   borderRadius: string | number;
   color: string;
-  fontSize: number;
+  fontSize: string;
   fontWeight: string | number;
   top: number;
   bottom: number;
@@ -15,7 +15,7 @@ export const Text = styled.Text`
   color: ${(props: {color: CommonProps}) =>
     props.color ? props.color : colors.lightBackground};
   font-size: ${(props: {fontSize: CommonProps}) =>
-    props.fontSize ? props.fontSize : 16};
+    props.fontSize ? props.fontSize : '16px'};
   font-weight: ${(props: {fontWeight: CommonProps}) =>
     props.fontWeight ? props.fontWeight : '500'};
   margin-top: ${(props: {top: CommonProps}) => (props.top ? props.top : 0)};
