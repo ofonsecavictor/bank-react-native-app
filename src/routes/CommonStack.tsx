@@ -67,7 +67,7 @@ export function CommonStack() {
           headerShown: true,
           headerStyle: {
             backgroundColor: colors.primary,
-            height: 120,
+            height: 90,
             borderBottomLeftRadius: 20,
             borderBottomRightRadius: 20,
           },
