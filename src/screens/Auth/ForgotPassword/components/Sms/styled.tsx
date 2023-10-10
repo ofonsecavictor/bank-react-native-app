@@ -24,4 +24,5 @@ export const SmsCodeInput = styled.TextInput`
   text-align: center;
   font-size: 18px;
   color: ${colors.text};
+  font-size: 50px;
 `;

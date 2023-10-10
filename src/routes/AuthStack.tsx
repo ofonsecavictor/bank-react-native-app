@@ -7,7 +7,6 @@ import {LoginScreen} from '../screens/Auth/LoginScreen';
 import {MainRegisterScreen} from '../screens/Auth/RegisterFlow';
 import {ForgotPasswordScreen} from '../screens/Auth/ForgotPassword';
 import {colors} from '../theme/theme';
-import {Platform} from 'react-native';
 
 export type AuthStackProps = {
   Slider: undefined;
@@ -45,7 +44,8 @@ export function AuthStack() {
             backgroundColor: colors.primary,
           },
           headerTintColor: colors.text,
-          headerTitle: Platform.OS === 'android' ? 'Recuperação de senha' : '',
+          headerBackTitle: ' ',
+          headerTitle: 'Recuperação de senha',
         }}
       />
     </Auth.Navigator>

@@ -40,7 +40,7 @@ export function ForgotPasswordScreen() {
           handleNewPassword={handleNewPassword}
         />
       )}
-      {smsCodeInputed && <NewPasswordScreen handleNewPassword={() => {}} />}
+      {smsCodeInputed && <NewPasswordScreen />}
     </MainContainer>
   );
 }

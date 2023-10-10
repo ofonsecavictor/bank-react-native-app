@@ -6,8 +6,8 @@ interface TextProps {
   color: string;
   size?: string | number;
   fontWeight?: string | number;
-  top?: number;
-  bottom?: number;
+  top?: string | number;
+  bottom?: string | number;
 }
 export function Text({
   content,

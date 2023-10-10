@@ -7,8 +7,8 @@ export interface CommonProps {
   color: string;
   fontSize: string;
   fontWeight: string | number;
-  top: number;
-  bottom: number;
+  top: string | number;
+  bottom: string | number;
 }
 
 export const Text = styled.Text`

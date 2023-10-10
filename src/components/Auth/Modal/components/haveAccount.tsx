@@ -57,7 +57,7 @@ export function HaveAccountMessage({onPress}: DoestHaveAccMessageProps) {
               onPress={onPress}
               top="20px"
               align="flex-start"
-              height={60}
+              height={'60px'}
             />
           );
         })}

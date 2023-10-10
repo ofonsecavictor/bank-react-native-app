@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View} from 'react-native';
+import {Keyboard, TouchableWithoutFeedback, View} from 'react-native';
 import {colors} from '../../../../../theme/theme';
 import {Button, Text} from '../../../../../components';
 import * as S from './styled';
@@ -34,60 +34,63 @@ export function NewPasswordScreen() {
         initialValues={{password: '', confirmPassword: ''}}
         onSubmit={handleToLogin}>
         {formikProps => (
-          <View
-            style={{
-              width: '100%',
-              alignItems: 'center',
-              flex: 1,
-              justifyContent: 'space-around',
-            }}>
-            <View style={{width: '90%', alignItems: 'center'}}>
-              <Text
-                color={colors.text}
-                content="Digite sua senha de 6 números"
-                fontWeight={400}
-              />
-              <S.CustomTextInput
-                placeholder="Digite sua senha"
-                error={
-                  !!formikProps.errors.password && formikProps.touched.password
-                }
-                onChangeText={(text: string) => {
-                  if (text.length <= 6) {
-                    formikProps.handleChange('password')(text);
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View
+              style={{
+                width: '100%',
+                alignItems: 'center',
+                flex: 1,
+                justifyContent: 'space-around',
+              }}>
+              <View style={{width: '90%'}}>
+                <Text
+                  color={colors.text}
+                  content="Digite sua senha de 6 números"
+                  fontWeight={400}
+                />
+                <S.CustomTextInput
+                  placeholder="Digite sua senha"
+                  error={
+                    !!formikProps.errors.password &&
+                    formikProps.touched.password
                   }
-                }}
-                onBlur={formikProps.handleBlur('password')}
-                value={formikProps.values.password}
-                secureTextEntry={true}
-              />
-              <Text
-                color={colors.text}
-                content="Confirme sua senha de 6 números"
-                fontWeight={400}
-              />
-              <S.CustomTextInput
-                placeholder="Digite sua senha"
-                error={
-                  !!formikProps.errors.confirmPassword &&
-                  formikProps.touched.confirmPassword
-                }
-                onChangeText={(text: string) => {
-                  if (text.length <= 6) {
-                    formikProps.handleChange('confirmPassword')(text);
+                  onChangeText={(text: string) => {
+                    if (text.length <= 6) {
+                      formikProps.handleChange('password')(text);
+                    }
+                  }}
+                  onBlur={formikProps.handleBlur('password')}
+                  value={formikProps.values.password}
+                  secureTextEntry={true}
+                />
+                <Text
+                  color={colors.text}
+                  content="Confirme sua senha de 6 números"
+                  fontWeight={400}
+                />
+                <S.CustomTextInput
+                  placeholder="Digite sua senha"
+                  error={
+                    !!formikProps.errors.confirmPassword &&
+                    formikProps.touched.confirmPassword
                   }
-                }}
-                onBlur={formikProps.handleBlur('password')}
-                value={formikProps.values.confirmPassword}
-                secureTextEntry={true}
+                  onChangeText={(text: string) => {
+                    if (text.length <= 6) {
+                      formikProps.handleChange('confirmPassword')(text);
+                    }
+                  }}
+                  onBlur={formikProps.handleBlur('password')}
+                  value={formikProps.values.confirmPassword}
+                  secureTextEntry={true}
+                />
+              </View>
+              <Button
+                primary
+                title="Salvar e voltar para o login"
+                onPress={formikProps.handleSubmit}
               />
             </View>
-            <Button
-              primary
-              title="Salvar e voltar para o login"
-              onPress={formikProps.handleSubmit}
-            />
-          </View>
+          </TouchableWithoutFeedback>
         )}
       </Formik>
     </>
