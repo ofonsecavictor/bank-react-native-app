@@ -5,15 +5,18 @@ import {StatusBar} from 'react-native';
 import {Routes} from './src/routes/routes';
 import {AuthProvider} from './src/contexts/authContext';
 import {ModalProvider} from './src/contexts/modalContext';
+import {TicketProvider} from './src/contexts/boletoContext';
 
 function App() {
   return (
     <>
       <StatusBar barStyle="default" backgroundColor="transparent" translucent />
       <AuthProvider>
-        <ModalProvider>
-          <Routes />
-        </ModalProvider>
+        <TicketProvider>
+          <ModalProvider>
+            <Routes />
+          </ModalProvider>
+        </TicketProvider>
       </AuthProvider>
     </>
   );

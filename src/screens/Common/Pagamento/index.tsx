@@ -1,22 +1,32 @@
-import React, {useState, useEffect, useRef} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect, useRef} from 'react';
 import BarcodeMask from 'react-native-barcode-mask';
 import * as S from './styled';
-import {Alert, Dimensions} from 'react-native';
+import {Dimensions} from 'react-native';
 import {Button} from '../../../components';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {CommonStackProps} from '../../../routes/CommonStack';
+import {useTicket} from '../../../contexts/boletoContext';
+
+type NavigationParam = NativeStackNavigationProp<
+  CommonStackProps,
+  'PagarBoleto'
+>;
 
 export const PaymentScreen = () => {
-  const [barcodeData, setBarcodeData] = useState(null);
   const cameraRef = useRef(null);
-
+  const navigation = useNavigation<NavigationParam>();
+  const {ticketNumber, setTicketNumber} = useTicket();
   const onBarCodeRead = (event: any) => {
-    setBarcodeData(event.data);
+    setTicketNumber(event.data);
   };
 
   useEffect(() => {
-    if (barcodeData) {
-      Alert.alert('Barcode data:', barcodeData);
+    if (ticketNumber) {
+      navigation.navigate('PagarBoleto');
     }
-  }, [barcodeData]);
+  }, [ticketNumber]);
 
   return (
     <S.Container>

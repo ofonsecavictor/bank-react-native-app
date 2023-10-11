@@ -12,12 +12,14 @@ import {TransferScreen} from '../screens/Common/Tranferencia';
 import {PaymentScreen} from '../screens/Common/Pagamento';
 import {RecargaScreen} from '../screens/Common/Recarga';
 import {Platform} from 'react-native';
+import {MakePayment} from '../screens/Common/Pagamento/makePayment';
 export type CommonStackProps = {
   MainTab: undefined;
   Boletos: undefined;
   Transferencia: undefined;
   Pagamento: undefined;
   Recarga: undefined;
+  PagarBoleto: undefined;
 };
 
 const Stack = createStackNavigator<CommonStackProps>();
@@ -75,6 +77,23 @@ export function CommonStack() {
           headerTintColor: colors.text,
           headerBackTitle: 'Pagamento',
           headerTitle: Platform.OS === 'android' ? 'Pagamento' : '',
+        }}
+      />
+      <Stack.Screen
+        name="PagarBoleto"
+        component={MakePayment}
+        options={{
+          headerShown: true,
+          headerStyle: {
+            shadowColor: 'transparent',
+            backgroundColor: colors.primary,
+            height: 120,
+            borderBottomLeftRadius: 20,
+            borderBottomRightRadius: 20,
+          },
+          headerTintColor: colors.text,
+          headerBackTitle: 'Recarga',
+          headerTitle: Platform.OS === 'android' ? 'Recarga' : '',
         }}
       />
 
