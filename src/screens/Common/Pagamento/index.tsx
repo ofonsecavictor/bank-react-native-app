@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import BarcodeMask from 'react-native-barcode-mask';
 import * as S from './styled';
-import {Dimensions} from 'react-native';
+import {ActivityIndicator, Dimensions, Modal} from 'react-native';
 import {Button} from '../../../components';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {CommonStackProps} from '../../../routes/CommonStack';
 import {useTicket} from '../../../contexts/boletoContext';
+import {colors} from '../../../theme/theme';
 
 type NavigationParam = NativeStackNavigationProp<
   CommonStackProps,
@@ -18,13 +19,26 @@ export const PaymentScreen = () => {
   const cameraRef = useRef(null);
   const navigation = useNavigation<NavigationParam>();
   const {ticketNumber, setTicketNumber} = useTicket();
+  const [loading, setLoading] = useState(false);
+  const [barcodeRead, setBarcodeRead] = useState(false);
+  console.log(loading);
   const onBarCodeRead = (event: any) => {
-    setTicketNumber(event.data);
+    if (!barcodeRead) {
+      setTicketNumber(event.data);
+      setBarcodeRead(true);
+    }
   };
 
   useEffect(() => {
-    if (ticketNumber) {
-      navigation.navigate('PagarBoleto');
+    if (!!ticketNumber) {
+      setLoading(true);
+      const timer = setInterval(() => {
+        clearInterval(timer);
+        navigation.navigate('PagarBoleto');
+        setLoading(false);
+        setBarcodeRead(false);
+      }, 5000);
+      return () => clearInterval(timer);
     }
   }, [ticketNumber]);
 
@@ -50,6 +64,12 @@ export const PaymentScreen = () => {
       <S.ManualInputContainer>
         <Button primary title="Digitar código de barras" onPress={() => {}} />
       </S.ManualInputContainer>
+
+      <Modal visible={loading} transparent={true} animationType="fade">
+        <S.ModalContainer>
+          <ActivityIndicator size="large" color={colors.secondary} />
+        </S.ModalContainer>
+      </Modal>
     </S.Container>
   );
 };

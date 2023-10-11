@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, MainContainer, Text} from '../../../../components';
 import {colors} from '../../../../theme/theme';
 import * as S from './styled';
@@ -9,9 +9,17 @@ import {
   Keyboard,
   View,
 } from 'react-native';
+import {useIsFocused} from '@react-navigation/native';
 
 export function MakePayment() {
   const {ticketNumber, setTicketNumber} = useTicket();
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (!isFocused) {
+      setTicketNumber(null);
+    }
+  }, [isFocused, setTicketNumber]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={{flex: 1}}>

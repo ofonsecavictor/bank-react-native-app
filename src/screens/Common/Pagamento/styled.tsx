@@ -44,3 +44,21 @@ export const ManualInputContainer = styled.View`
   padding: 50px;
   align-items: center;
 `;
+
+export const LoadingContainer = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const LoadingText = styled.Text`
+  font-size: 20px;
+  color: #333;
+`;
+
+export const ModalContainer = styled.View`
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+`;

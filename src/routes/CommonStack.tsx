@@ -92,7 +92,7 @@ export function CommonStack() {
             borderBottomRightRadius: 20,
           },
           headerTintColor: colors.text,
-          headerBackTitle: 'Recarga',
+          headerBackTitle: 'Pagamento',
           headerTitle: Platform.OS === 'android' ? 'Recarga' : '',
         }}
       />
