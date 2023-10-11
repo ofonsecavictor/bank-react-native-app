@@ -27,7 +27,7 @@ export function MakePayment() {
             placeholder="Digite o boleto"
             value={ticketNumber}
             multiline={true}
-            numberOfLines={3}
+            numberOfLines={2}
             onChangeText={(text: number) => setTicketNumber(text)}
           />
           <View style={{width: '100%', alignItems: 'center'}}>
