@@ -4,7 +4,18 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {colors} from '../../../theme/theme';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {RFValue} from 'react-native-responsive-fontsize';
-export function HomeHeader() {
+
+interface HomeHeaderProps {
+  isExtract?: boolean;
+  showAmount: () => void;
+  hasShowAmount: boolean;
+}
+
+export function HomeHeader({
+  isExtract,
+  showAmount,
+  hasShowAmount,
+}: HomeHeaderProps) {
   return (
     <View
       style={{
@@ -16,18 +27,20 @@ export function HomeHeader() {
         borderBottomRightRadius: 20,
         width: '100%',
       }}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-        <Text style={{fontSize: RFValue(22), color: 'white'}}>
-          Olá, Victor!
-        </Text>
-        <TouchableOpacity>
-          <Icon name="visibility" size={30} color={colors.secondary} />
-        </TouchableOpacity>
-      </View>
+      {!isExtract && (
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <Text style={{fontSize: RFValue(22), color: 'white'}}>
+            Olá, Victor!
+          </Text>
+          <TouchableOpacity onPress={showAmount}>
+            <Icon name="visibility" size={30} color={colors.secondary} />
+          </TouchableOpacity>
+        </View>
+      )}
 
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View>
@@ -42,16 +55,23 @@ export function HomeHeader() {
               fontWeight: 'bold',
               marginTop: 5,
             }}>
-            R$ 0,00
+            {hasShowAmount ? `R$ 0,00` : '********'}
           </Text>
         </View>
         <View>
           <TouchableOpacity style={{marginRight: 5}}>
-            <MaterialCommunityIcons
-              name="reload"
-              size={20}
-              color={colors.secondary}
-            />
+            <>
+              {isExtract && (
+                <Icon name="visibility" size={30} color={colors.secondary} />
+              )}
+              {!isExtract && (
+                <MaterialCommunityIcons
+                  name="reload"
+                  size={20}
+                  color={colors.secondary}
+                />
+              )}
+            </>
           </TouchableOpacity>
         </View>
       </View>

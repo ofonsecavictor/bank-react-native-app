@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, View} from 'react-native';
 import {HomeHeader} from '../../../components/Home/Header';
 import {CardNoticeComponent} from '../../../components/Home/Card';
@@ -10,7 +11,8 @@ type RouteKeys = 'Pix' | 'Boletos';
 
 export function HomeScreen() {
   const navigation = useNavigation<any>();
-
+  const [showValue, setSHowValue] = useState(false);
+  const showCards = false;
   const Actions = [
     {
       id: 1,
@@ -42,11 +44,13 @@ export function HomeScreen() {
     navigation.navigate(screenName);
   };
 
-  const showCards = false;
+  const showAmount = () => {
+    setSHowValue(!showValue);
+  };
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.text}}>
-      <HomeHeader />
+      <HomeHeader showAmount={showAmount} hasShowAmount={showValue} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{flexGrow: 1, alignItems: 'center'}}>
